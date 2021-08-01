@@ -4,9 +4,11 @@
       My Peeps
     </div>
 
-    <div *ngFor="let p of people">
-      {{ p.firstName }} {{ p.lastName }}
-    </div>
+    <app-nameplate
+      *ngFor="let p of people"
+      [person]="p"
+      (onPersonSelected)="personSelected($event)">
+    </app-nameplate>
 
   </div>
 </div>
