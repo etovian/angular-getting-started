@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Person} from "../person/person";
+import {PeopleService} from "../person/people.service";
 
 @Component({
   selector: 'mjg-list',
@@ -10,55 +11,10 @@ export class ListComponent implements OnInit {
 
   people: Person[] = [];
 
-  constructor() { }
+  constructor(private peopleService: PeopleService) {}
 
   ngOnInit(): void {
-    this.people = this.getPeople();
-  }
-
-  getPeople(): Person[] {
-    return [
-      {
-        firstName: 'Amy',
-        lastName: 'Green'
-      },
-      {
-        firstName: 'Jillian',
-        lastName: 'Green'
-      },
-      {
-        firstName: 'Juliette',
-        lastName: 'Green'
-      },
-      {
-        firstName: 'Mike',
-        lastName: 'Green'
-      },
-      {
-        firstName: 'John',
-        lastName: 'Lamulle'
-      },
-      {
-        firstName: 'Jacob',
-        lastName: 'Lamulle'
-      },
-      {
-        firstName: 'Cecilia',
-        lastName: 'Lamulle'
-      },
-      {
-        firstName: 'Scott',
-        lastName: 'McDaniel'
-      },
-      {
-        firstName: 'Benjamin',
-        lastName: 'McDaniel'
-      },
-      {
-        firstName: 'Edina',
-        lastName: 'Bakos'
-      }
-    ];
+    this.people = this.peopleService.getPeople();
   }
 
   personSelected(person: Person): void {
