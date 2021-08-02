@@ -14,7 +14,10 @@ export class ListComponent implements OnInit {
   constructor(private peopleService: PeopleService) {}
 
   ngOnInit(): void {
-    this.people = this.peopleService.getPeople();
+    this.peopleService.getPeople().subscribe({
+      next: people => this.people = people,
+      error: ex => console.log(ex)
+    })
   }
 
   personSelected(person: Person): void {
