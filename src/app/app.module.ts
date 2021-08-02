@@ -6,17 +6,27 @@ import {AppComponent} from './app.component';
 import {ListComponent} from './list/list.component';
 import {NameplateComponent} from './person/nameplate/nameplate.component';
 import {HttpClientModule} from "@angular/common/http";
+import {PersonDetailComponent} from './person/person-detail/person-detail.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    NameplateComponent
+    NameplateComponent,
+    PersonDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'home', component: ListComponent },
+      { path: 'people', component: ListComponent },
+      { path: 'person/:id', component: PersonDetailComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

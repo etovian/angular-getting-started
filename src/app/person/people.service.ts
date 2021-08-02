@@ -12,7 +12,14 @@ export class PeopleService {
 
   private PEOPLE_URL = 'http://localhost:8080/people';
 
+  findById(id: string | null): Observable<Person> {
+    const url = `${this.PEOPLE_URL}/${id}`;
+    return this.http.get<Person>(url);
+  }
+
   getPeople(): Observable<Person[]> {
     return this.http.get<Person[]>(this.PEOPLE_URL)
   }
+
+
 }
