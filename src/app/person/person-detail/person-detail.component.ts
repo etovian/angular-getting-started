@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Person} from "../person";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PeopleService} from "../people.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-person-detail',
@@ -15,15 +16,24 @@ export class PersonDetailComponent implements OnInit {
 
   constructor(
     private peopleService: PeopleService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.peopleService.findById(id).subscribe({
       next: person => this.person = person,
-      error: (e) => console.log(e)
+      error: (e) => this.handleError(e)
     });
   }
 
+  goBack(): void {
+    this.router.navigate(['/people'])
+  }
+
+  handleError(error: HttpErrorResponse): void {
+    console.log(error);
+    this.goBack();
+  }
 }
